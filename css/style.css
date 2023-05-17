@@ -1,0 +1,38 @@
+
+
+.impact{
+    font-family: 'Poppins', sans-serif;
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navegador{
+    margin: 20px;
+}
+
+.navegador ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+.navegador li {
+    display: inline;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+h1 {
+    font-size: xx-large;
+    padding: 10vh;
+}
