@@ -1,62 +1,33 @@
+const pedido = []
+const opcion = [{tipo: 'hamburguesa simple', precio: 150, codigo: 1},
+                {tipo: 'hamburguesa doble', precio: 250, codigo: 3},
+                {tipo: 'hamburguesa vegetariana', precio: 150, codigo: 3},
+                {tipo: 'postre', precio: 50, codigo: 4},
+                {tipo: 'envio', precio: 50, codigo: 5}]
 
-alert("A continuación podrás realizar tu pedido")
-let hamburguesaSimple = 150
-let hamburguesaDoble = 250
-let hamburguesaVege = 200
-let helado = 50
-let envio = 50
-
-function pedirHamburguesa() {
-    let hamburguesa = prompt("1-hamburguesa simple. 2-Hamburguesa doble quarto de libra. 3-Hamburguesa vegetariana")
-    if (hamburguesa == "hamburguesa simple") {
-        resultado = hamburguesaSimple
-        alert("El costo de tu hamburguesa es $" + hamburguesaSimple)
-    } else if (hamburguesa == "hamburguesa doble") {
-        resultado = hamburguesaDoble;
-        alert("El costo de tu hamburguesa es $" + hamburguesaDoble)
-    } else if (hamburguesa == "hamburguesa vegetariana") {
-        resultado = hamburguesaVege;
-        alert("El costo de tu hamburguesa es $" + hamburguesaVege)
-    } else {
-        alert("Vuelve a elegir tu hamburguesa")
-    }
-    return hamburguesa
+function buscarOpcion(codigo) {
+    let resultado = opcion.find((opcion)=> opcion.codigo === parseInt(codigo))
+    return resultado
 }
 
-function agregarPostre() {
-    let postre = prompt("Deseas agregar postre?")
-    if (postre === "si") {
-        alert("Se agrego postre a tu pedido $" + helado);
-    } else if (postre === "no") {
-        alert("No se agrego postre a tu pedido");
-    } else {
-        alert("Vuelve a ingresar")
-    }
-    return postre
+function finalizarPedido() {
+    const cena = new Orden(pedido)
+    alert ('Tu pedido es ' + cena.totalPedido() + ' que lo disfrutes!')
 }
 
-function agregarEnvio() {
-    let sumarEnvio = prompt("Ingresa el costo de envio")
-    while (sumarEnvio != 50) {
-        sumarEnvio = prompt("vuelve a ingresar el costo de envio")
-    }
-    return sumarEnvio
-}
-
-function pedidoTotal(hamburguesa, postre, sumarEnvio) {
-    if (hamburguesa && postre && sumarEnvio) {
-        const total = (hamburguesa + postre + sumarEnvio)
-        return total
+function agregarAlPedido() {
+    let codigo = prompt('Elige tus favoritos. 1-hamburguesa simple 2-hamburguesa doble 3-hamburguesa vegetariana 4-postre 5-envio')
+    let hamburguesaAgregada = buscarOpcion(codigo)
+    if (hamburguesaAgregada !== undefined) {
+        pedido.push(hamburguesaAgregada)
+        alert (hamburguesaAgregada.tipo + ' se agrego al menú')
+        let respuesta = confirm('Desea agregar otra opción?')
+        if (respuesta === true) {
+            agregarAlPedido()
+        } else {
+            finalizarPedido()
+        }
     }
 }
 
-const hamburguesa = pedirHamburguesa()
-const postre = agregarPostre()
-const sumarEnvio = agregarEnvio()
-const resultadoTotal = pedidoTotal(hamburguesa, postre, sumarEnvio)
-alert("tu pedido es " + resultadoTotal)
-
-for (let i = 0; i < 2; i++) {
-    alert((i + 1) + " cuotas sin interes. ")
-}
-
+agregarAlPedido()

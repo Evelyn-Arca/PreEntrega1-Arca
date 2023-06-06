@@ -28,11 +28,33 @@ body {
 
 .navegador li {
     display: inline;
-    text-align: center;
+    text-align: justify;
     margin: 0 10px 0 0;
 }
 
 h1 {
     font-size: xx-large;
     padding: 10vh;
+}
+.imagenes {
+    width: 500px;
+}
+
+.redes {
+    padding: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu {
+    font-size: x-large;
+    font-weight: 100;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.pocitos {
+    padding: 50px;
+    margin: 50px;
 }
