@@ -36,9 +36,6 @@ h1 {
     font-size: xx-large;
     padding: 10vh;
 }
-.imagenes {
-    width: 500px;
-}
 
 .redes {
     padding: 100px;
@@ -57,4 +54,57 @@ h1 {
 .pocitos {
     padding: 50px;
     margin: 50px;
+}
+
+html {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    color-scheme: white;
+    margin: 8px;
+}
+
+p,
+select,
+input,
+span {
+    font-size: large;
+}
+
+table {
+    width: 90% !important;
+    margin-left: 5%;
+}
+
+.image {
+    font-size: 24px;
+    width: 60px;
+    height: 50px;
+}
+
+thead {
+    font-weight: 800;
+    font-size: larger;
+}
+
+tbody tr:hover {
+    background: white;
+}
+
+.button-big-emoji {
+    font-size: x-large;
+}
+
+.toast-msg {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    height: 46px;
+    width: 100%;
+    background-color: white;
+    color: whitesmoke;
+    border-radius: 6px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
 }

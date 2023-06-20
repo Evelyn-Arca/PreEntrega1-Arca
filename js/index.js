@@ -1,33 +1,44 @@
-const pedido = []
-const opcion = [{tipo: 'hamburguesa simple', precio: 150, codigo: 1},
-                {tipo: 'hamburguesa doble', precio: 250, codigo: 3},
-                {tipo: 'hamburguesa vegetariana', precio: 150, codigo: 3},
-                {tipo: 'postre', precio: 50, codigo: 4},
-                {tipo: 'envio', precio: 50, codigo: 5}]
+const tableBody = document.querySelector("tbody")
+const inputSearch = document.querySelector("input#inputSearch")
 
-function buscarOpcion(codigo) {
-    let resultado = opcion.find((opcion)=> opcion.codigo === parseInt(codigo))
-    return resultado
+const armarFilaHTML = (prod)=> {
+    return `<tr>
+                <td class="class-table-number">${prod.id}</td>
+                <td class="image"><img src="${prod.imagen}" tittle="titulo de la imagen"></td>
+                <td>$ ${prod.precio}</td>
+                <td> ${prod.nombre}</td>
+                <td><button id="${prod.id}" class="button button-outline button-big-emoji">🤍</button></td>
+            </tr>`
 }
 
-function finalizarPedido() {
-    const cena = new Orden(pedido)
-    alert ('Tu pedido es ' + cena.totalPedido() + ' que lo disfrutes!')
+const filtrarProductos = ()=> {
+    let arrayResultado = productosGastronomicos.filter((producto)=> producto.nombre.toLowerCase().includes(inputSearch.value.trim().toLowerCase()))
+    if (arrayResultado.length > 0) {
+        cargarProductos(arrayResultado)
+    }
+}
+inputSearch.addEventListener('search', filtrarProductos)
+
+const cargarProductos = (array)=> {
+    tableBody.innerHTML = ''
+    array.forEach((producto) => {
+        tableBody.innerHTML += armarFilaHTML(producto)
+    })
+    activarClickEnBotonesFav()
 }
 
-function agregarAlPedido() {
-    let codigo = prompt('Elige tus favoritos. 1-hamburguesa simple 2-hamburguesa doble 3-hamburguesa vegetariana 4-postre 5-envio')
-    let hamburguesaAgregada = buscarOpcion(codigo)
-    if (hamburguesaAgregada !== undefined) {
-        pedido.push(hamburguesaAgregada)
-        alert (hamburguesaAgregada.tipo + ' se agrego al menú')
-        let respuesta = confirm('Desea agregar otra opción?')
-        if (respuesta === true) {
-            agregarAlPedido()
-        } else {
-            finalizarPedido()
-        }
+const activarClickEnBotonesFav = ()=> {
+    const botonesFav = document.querySelectorAll('button.button.button-outline.button-big-emoji')
+    for (let botonFav of botonesFav) {
+        botonFav.addEventListener('click', ()=> {
+            let resultadoProducto = productosGastronomicos.find((prod)=> prod.id === parseInt(botonFav.id))
+            favoritos.push(resultadoProducto)
+            guardarEnLocalStorage()
+            mostrarMensajes(`El producto ${resultadoProducto.nombre} se guardó en favoritos...`, 'pink')
+        })
     }
 }
 
-agregarAlPedido()
+cargarProductos(productosGastronomicos)
+
+
