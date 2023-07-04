@@ -7,20 +7,20 @@ const productosGastronomicos = [
 ]
 
 const guardarEnLocalStorage = ()=> {
-    if (favoritos.length > 0) {
-        localStorage.setItem('Favoritos', JSON.stringify(favoritos))
+    if (comprar.length > 0) {
+        localStorage.setItem('Comprar', JSON.stringify(comprar))
     }
 }
 
-const recuperarFavsDeLocalStorage = ()=> {
-    if (localStorage.getItem('Favoritos')) {
-        return JSON.parse(localStorage.getItem('Favoritos'))
+const recuperarComprasDeLocalStorage = ()=> {
+    if (localStorage.getItem('Comprar')) {
+        return JSON.parse(localStorage.getItem('Comprar'))
     } else {
         return []
     }
 }
 
-const favoritos = recuperarFavsDeLocalStorage()
+const comprar = recuperarComprasDeLocalStorage()
 
 const mostrarMensajes = (msg, bgcolor)=> {
     const divMsg = document.querySelector('div.toast-msg')

@@ -1,6 +1,8 @@
 const tableBody = document.querySelector("tbody")
 const inputSearch = document.querySelector("input#inputSearch")
 
+const cart = []
+
 const armarFilaHTML = (prod)=> {
     return `<tr>
                 <td class="class-table-number">${prod.id}</td>
@@ -24,21 +26,45 @@ const cargarProductos = (array)=> {
     array.forEach((producto) => {
         tableBody.innerHTML += armarFilaHTML(producto)
     })
-    activarClickEnBotonesFav()
+    activarClickEnBotonesComprar()
 }
 
-const activarClickEnBotonesFav = ()=> {
-    const botonesFav = document.querySelectorAll('button.button.button-outline.button-big-emoji')
-    for (let botonFav of botonesFav) {
-        botonFav.addEventListener('click', ()=> {
-            let resultadoProducto = productosGastronomicos.find((prod)=> prod.id === parseInt(botonFav.id))
-            favoritos.push(resultadoProducto)
+const activarClickEnBotonesComprar = ()=> {
+    const botonesComprar = document.querySelectorAll('button.button.button-outline.button-big-emoji')
+    for (let botonComprar of botonesComprar) {
+        botonComprar.addEventListener('click', ()=> {
+            let resultadoProducto = productosGastronomicos.find((prod)=> prod.id === parseInt(botonComprar.id))
+            cart.push(resultadoProducto)
             guardarEnLocalStorage()
-            mostrarMensajes(`El producto ${resultadoProducto.nombre} se guardó en favoritos...`, 'pink')
+            mostrarMensajes(`El producto ${resultadoProducto.nombre} se guardó en carrito...`, 'pink')
+            mostrarCarrito()
         })
     }
 }
 
+const mostrarCarrito = () => {
+    const carrito = document.querySelector('#carrito')
+    carrito.innerHTML = ''
+    let total = 0 
+    if (cart.length > 0) {
+        cart.forEach((producto) => {
+            carrito.innerHTML += `<p>${producto.nombre} - $${producto.precio}</p>`
+            total += producto.precio
+        })
+        carrito.innerHTML += `<p>Total: $${total}</p>` 
+    } else {
+        carrito.innerHTML = '<p>No hay productos en el carrito</p>'
+    }
+}
+
+const finalizarCompraButton = document.querySelector('#finalizarCompra');
+finalizarCompraButton.addEventListener('click', () => {
+  cart.length = 0;
+  mostrarMensajes('Compra finalizada!', 'pink');
+  mostrarCarrito();
+});
+
 cargarProductos(productosGastronomicos)
+mostrarCarrito()
 
 
