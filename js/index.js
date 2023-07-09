@@ -59,12 +59,20 @@ const mostrarCarrito = () => {
 
 const finalizarCompraButton = document.querySelector('#finalizarCompra');
 finalizarCompraButton.addEventListener('click', () => {
+  const shippingAddress = document.querySelector('#shippingAddress').value;
+  const paymentMethod = document.querySelector('#paymentMethod').value;
   cart.length = 0;
-  mostrarMensajes('Compra finalizada!', 'pink');
+  mostrarMensajes(`Compra finalizada! El producto será enviado a: ${shippingAddress}. Método de pago: ${paymentMethod}`, 'pink');
   mostrarCarrito();
+});
+
+const nuevaCompraButton = document.querySelector('#nuevaCompra');
+nuevaCompraButton.addEventListener('click', () => {
+  cart.length = 0;
+  mostrarCarrito();
+  location.reload();
 });
 
 cargarProductos(productosGastronomicos)
 mostrarCarrito()
-
 

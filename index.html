@@ -32,8 +32,17 @@
     </div>
     
     <div id="carrito"></div>
+    
+    <label for="shippingAddress">Dirección para envio:</label>
+    <input type="text" id="shippingAddress" name="shippingAddress">
+    <label for="paymentMethod">Método de pago:</label>
+    <select id="paymentMethod">
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta de crédito</option>
+        <option value="transferencia">Transferencia bancaria</option>
+    </select>
     <button id="finalizarCompra" class="button button-outline button-big-emoji">Finalizar compra</button>
-
+    <button id="nuevaCompra">Nueva compra</button>
     <table>
         <thead>
             <tr>
